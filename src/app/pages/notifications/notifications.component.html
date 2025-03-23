@@ -1,0 +1,26 @@
+<div class="notifications-container">
+  <h1>Notifications</h1>
+  
+  <div class="search-container">
+    <div class="search-input-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" placeholder="Search notifications..." [(ngModel)]="searchTerm">
+    </div>
+  </div>
+  
+  <div class="notifications-list">
+    <div class="notifications-header">
+      <div class="notification-type">Type</div>
+      <div class="notification-summary">Summary</div>
+    </div>
+    
+    <div class="notification-items">
+      <div class="notification-item" *ngFor="let notification of filteredNotifications">
+        <div class="notification-type">
+          <a [routerLink]="['/notifications', notification.id]" class="notification-link">{{ notification.type }}</a>
+        </div>
+        <div class="notification-summary">{{ notification.summary }}</div>
+      </div>
+    </div>
+  </div>
+</div>

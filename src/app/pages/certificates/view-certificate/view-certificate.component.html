@@ -1,0 +1,58 @@
+<div class="certificate-details-container" *ngIf="certificate">
+  <div class="certificate-header">
+    <h2>LCR Details</h2>
+    <div class="divider"></div>
+  </div>
+  
+  <div class="certificate-info">
+    <div class="info-row">
+      <div class="info-label">LCR Title:</div>
+      <div class="info-value">{{ certificate.title }}</div>
+    </div>
+    
+    <div class="info-row">
+      <div class="info-label">LCR ID:</div>
+      <div class="info-value">{{ certificate.lcrId }}</div>
+    </div>
+    
+    <div class="info-row">
+      <div class="info-label">Expiry Date:</div>
+      <div class="info-value">{{ certificate.expiryDate }}</div>
+    </div>
+    
+    <div class="info-row">
+      <div class="info-label">Issuing Authority:</div>
+      <div class="info-value">{{ certificate.issuingAuthority }}</div>
+    </div>
+    
+    <div class="info-row">
+      <div class="info-label">Jurisdiction:</div>
+      <div class="info-value">{{ certificate.jurisdiction }}</div>
+    </div>
+  </div>
+  
+  <div class="certificate-actions">
+    <a (click)="viewConnections()" class="connection-link">
+      View Connections where this LCR is linked
+    </a>
+    
+    <div class="action-buttons">
+      <button 
+        *ngIf="certificate.hasImage" 
+        (click)="viewImage()" 
+        class="view-image-btn">
+        View LCR Image
+      </button>
+      
+      <button 
+        (click)="deleteCertificate()" 
+        class="delete-btn">
+        Delete LCR
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!certificate">
+  <p>Certificate not found. Redirecting to certificates list...</p>
+</div>

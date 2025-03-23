@@ -1,0 +1,34 @@
+<div class="certificates-container">
+  <h2>My Certificates</h2>
+  
+  <div class="certificates-list">
+    <table class="certificates-table">
+      <thead>
+        <tr>
+          <th>LCR Title</th>
+          <th>Click to Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let certificate of certificates">
+          <td class="title-cell">
+            <a [routerLink]="['/certificates', certificate.id]" class="certificate-link">
+              {{ certificate.title }}
+            </a>
+          </td>
+          <td class="action-cell">
+            <a *ngFor="let action of certificate.actions" 
+               [routerLink]="['/certificates/action', action.toLowerCase().replace(' ', '-')]"
+               class="action-link">
+              {{ action }}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="add-certificate-button">
+    <a routerLink="/certificates/add" class="add-button">+ Add Certificate</a>
+  </div>
+</div>

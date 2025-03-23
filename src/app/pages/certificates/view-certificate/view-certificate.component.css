@@ -1,0 +1,113 @@
+.certificate-details-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.certificate-header {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.divider {
+  height: 1px;
+  background-color: #ddd;
+  margin: 10px 0;
+}
+
+.certificate-info {
+  margin-bottom: 25px;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #333;
+  margin-right: 8px;
+  min-width: 120px;
+}
+
+.info-value {
+  color: #555;
+}
+
+.certificate-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.connection-link {
+  color: #0066cc;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.connection-link:hover {
+  text-decoration: underline;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.view-image-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.view-image-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+.not-found {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .certificate-details-container {
+    padding: 15px;
+  }
+  
+  .info-row {
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .info-label {
+    margin-bottom: 4px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+}

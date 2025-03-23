@@ -1,0 +1,38 @@
+<div class="notification-details-container" *ngIf="notification">
+  <h1>Notification Details - {{ notification.type }}</h1>
+  
+  <div class="notification-info">
+    <div class="info-row">
+      <div class="info-label">LCR Title:</div>
+      <div class="info-value">{{ notification.title }}</div>
+    </div>
+    
+    <div class="info-row">
+      <div class="info-label">LCR ID:</div>
+      <div class="info-value">{{ notification.lcrId }}</div>
+    </div>
+    
+    <div class="info-row">
+      <div class="info-label">Expiry Date:</div>
+      <div class="info-value">{{ notification.expiryDate }}</div>
+    </div>
+    
+    <div class="info-row">
+      <div class="info-label">Issuing Authority -</div>
+      <div class="info-value">{{ notification.issuingAuthority }}</div>
+    </div>
+  </div>
+  
+  <div class="notification-actions">
+    <a class="connection-link" routerLink="/certificates">View Connections where this LCR is linked</a>
+    
+    <div class="action-buttons">
+      <button class="delete-btn" (click)="deleteNotification()">Delete Message</button>
+    </div>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!notification">
+  <p>Notification not found.</p>
+  <a routerLink="/notifications">Return to Notifications</a>
+</div>

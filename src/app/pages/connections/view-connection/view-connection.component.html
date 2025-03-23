@@ -1,0 +1,47 @@
+<div class="connection-details-container" *ngIf="connection">
+  <h1>Connection Details</h1>
+  
+  <div class="connection-info">
+    <div class="info-row">
+      <div class="company-name">{{ connection.company }}</div>
+      <div class="company-type">{{ connection.type }}</div>
+    </div>
+    
+    <div class="permission-row">
+      <div class="permission-label">Allow to search / view all LCRs</div>
+      <div class="permission-value">
+        <div class="toggle-container">
+          <div class="toggle-text">{{ allowViewLCRs ? 'Yes' : 'No' }}</div>
+          <button class="toggle-button" [class.active]="allowViewLCRs" (click)="toggleAllowViewLCRs()">
+            <span class="checkmark" *ngIf="allowViewLCRs">✓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="permission-row">
+      <div class="permission-label">Auto-Submit LCRs with an accuracy score % greater than</div>
+      <div class="permission-value">
+        <div class="toggle-container">
+          <div class="toggle-text">{{ autoSubmitThreshold }}%</div>
+          <button class="toggle-button active">
+            <span class="checkmark">✓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="connection-actions">
+    <div class="action-buttons">
+      <button class="connect-btn" (click)="connect()">Connect</button>
+      <span class="or-text">or</span>
+      <button class="disconnect-btn" (click)="disconnect()">Disconnect</button>
+    </div>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!connection">
+  <p>Connection not found.</p>
+  <a routerLink="/connections">Return to Connections</a>
+</div>

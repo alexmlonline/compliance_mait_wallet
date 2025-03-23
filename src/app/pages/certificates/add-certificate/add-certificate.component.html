@@ -1,0 +1,99 @@
+<div class="add-certificate-container">
+  <h2>Add Certificate</h2>
+  
+  <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()" class="certificate-form">
+    <div class="form-field">
+      <label for="title">Title</label>
+      <div class="input-container">
+        <input id="title" type="text" formControlName="title" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="description">Description</label>
+      <div class="input-container">
+        <textarea id="description" formControlName="description" placeholder="Enter Free Text"></textarea>
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="lcrId">LCR ID</label>
+      <div class="input-container">
+        <input id="lcrId" type="text" formControlName="lcrId" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="issuedTo">Issued To</label>
+      <div class="input-container">
+        <input id="issuedTo" type="text" formControlName="issuedTo" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="issuedBy">Issued By</label>
+      <div class="input-container">
+        <input id="issuedBy" type="text" formControlName="issuedBy" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-field half-width">
+        <label for="issuedDate">Issued Date</label>
+        <div class="input-container select-container">
+          <input id="issuedDate" type="date" formControlName="issuedDate" placeholder="Select / Edit">
+          <div class="select-icon">▼</div>
+        </div>
+      </div>
+      
+      <div class="form-field half-width">
+        <label for="expiryDate">Expiry Date</label>
+        <div class="input-container select-container">
+          <input id="expiryDate" type="date" formControlName="expiryDate" placeholder="Select / Edit">
+          <div class="select-icon">▼</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="jurisdiction">Jurisdiction (Country / State)</label>
+      <div class="input-container select-container">
+        <select id="jurisdiction" formControlName="jurisdiction">
+          <option value="" disabled selected>Select / Edit</option>
+          <option value="us">United States</option>
+          <option value="ca">Canada</option>
+          <option value="uk">United Kingdom</option>
+          <option value="au">Australia</option>
+          <option value="nz">New Zealand</option>
+        </select>
+        <div class="select-icon">▼</div>
+      </div>
+    </div>
+    
+    <div class="form-field checkbox-field">
+      <div class="checkbox-container">
+        <input 
+          type="checkbox" 
+          id="isReplacementLCR" 
+          [checked]="isReplacementLCR"
+          (change)="toggleReplacementLCR()"
+        >
+        <label for="isReplacementLCR">Replacement LCR</label>
+      </div>
+      
+      <div class="input-container select-container" *ngIf="isReplacementLCR">
+        <select id="replacementLCR" formControlName="replacementLCR">
+          <option value="" disabled selected>Select / Edit</option>
+          <option value="lcr1">LCR-001</option>
+          <option value="lcr2">LCR-002</option>
+          <option value="lcr3">LCR-003</option>
+        </select>
+        <div class="select-icon">▼</div>
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" class="save-button">Save</button>
+    </div>
+  </form>
+</div>

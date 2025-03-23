@@ -1,0 +1,85 @@
+<div class="profile-container">
+  <h2>Service Specialist Profile</h2>
+  
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+    <div class="avatar-section">
+      <div class="avatar-placeholder">
+        <span class="avatar-icon">👤</span>
+      </div>
+      <div class="occupation">Electrician</div>
+    </div>
+    
+    <div class="form-field">
+      <label for="email">Email</label>
+      <div class="input-container">
+        <input id="email" type="email" formControlName="email" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="password">Password</label>
+      <div class="input-container">
+        <input id="password" type="password" formControlName="password" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="fullName">Full Name</label>
+      <div class="input-container">
+        <input id="fullName" type="text" formControlName="fullName" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="dateOfBirth">Date of Birth</label>
+      <div class="input-container select-container">
+        <input id="dateOfBirth" type="date" formControlName="dateOfBirth" placeholder="Select / Edit">
+        <div class="select-icon">▼</div>
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="phoneNumber">Phone Number</label>
+      <div class="input-container">
+        <input id="phoneNumber" type="tel" formControlName="phoneNumber" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="streetAddress">Street Address</label>
+      <div class="input-container">
+        <input id="streetAddress" type="text" formControlName="streetAddress" placeholder="Enter / Edit">
+      </div>
+    </div>
+    
+    <div class="form-field checkbox-field">
+      <div class="checkbox-container">
+        <input 
+          type="checkbox" 
+          id="availableForWork" 
+          formControlName="availableForWork"
+        >
+        <label for="availableForWork">Available For Work</label>
+      </div>
+    </div>
+    
+    <div class="form-field">
+      <label for="region">Region</label>
+      <div class="input-container select-container">
+        <select id="region" formControlName="region">
+          <option value="" disabled selected>Select / Edit</option>
+          <option value="north">North</option>
+          <option value="south">South</option>
+          <option value="east">East</option>
+          <option value="west">West</option>
+          <option value="central">Central</option>
+        </select>
+        <div class="select-icon">▼</div>
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" class="save-button">Save</button>
+    </div>
+  </form>
+</div>

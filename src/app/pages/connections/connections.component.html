@@ -1,0 +1,31 @@
+<div class="connections-container">
+  <h1>Connections</h1>
+  
+  <div class="search-container">
+    <div class="search-input-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" placeholder="Search connections..." [(ngModel)]="searchTerm">
+    </div>
+  </div>
+  
+  <div class="connections-list">
+    <div class="connections-header">
+      <div class="connection-company">Company</div>
+      <div class="connection-type">Type</div>
+      <div class="connection-allow">Allow to View LCRs</div>
+    </div>
+    
+    <div class="connection-items">
+      <div class="connection-item" *ngFor="let connection of filteredConnections">
+        <div class="connection-company">
+          <a [routerLink]="['/connections', connection.id]" class="connection-link">{{ connection.company }}</a>
+        </div>
+        <div class="connection-type">{{ connection.type }}</div>
+        <div class="connection-allow">
+          <span *ngIf="connection.status === 'connected'">{{ connection.allowViewLCRs ? 'Yes' : 'No' }}</span>
+          <span *ngIf="connection.status === 'pending'" class="new-connect-request">New Connect Request</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

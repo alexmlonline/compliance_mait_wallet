@@ -1,0 +1,126 @@
+.connection-details-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.connection-info {
+  margin-bottom: 30px;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.company-name {
+  font-size: 1.3rem;
+  color: #666;
+  font-weight: 400;
+  margin-right: 20px;
+  flex: 1;
+}
+
+.company-type {
+  font-size: 1.3rem;
+  color: #666;
+  font-weight: 400;
+  flex: 1;
+  text-align: right;
+}
+
+.permission-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.permission-label {
+  flex: 2;
+  font-size: 1rem;
+  color: #666;
+}
+
+.permission-value {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-text {
+  margin-right: 10px;
+  min-width: 50px;
+  text-align: right;
+  color: #666;
+}
+
+.toggle-button {
+  width: 40px;
+  height: 40px;
+  background-color: #e0e0e0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.toggle-button.active {
+  background-color: #444;
+}
+
+.checkmark {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.connection-actions {
+  margin-top: 30px;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.connect-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.or-text {
+  margin: 0 15px;
+  color: #666;
+}
+
+.disconnect-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.not-found {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}

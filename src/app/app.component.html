@@ -1,0 +1,101 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<!-- Mobile Header with Logo and Burger Menu -->
+<div class="mobile-header">
+  <div class="app-logo">
+    <img src="logo.png" alt="Compliance MAIT Logo" class="logo-image">
+  </div>
+  <button class="burger-menu" (click)="toggleMobileMenu()">
+    <span class="burger-icon">☰</span>
+  </button>
+</div>
+
+<!-- Side Panel (Desktop) / Mobile Menu -->
+<div class="app-container">
+  <div class="side-panel" [class.collapsed]="isPanelCollapsed" [class.mobile-open]="isMobileMenuOpen">
+    <div class="panel-header">
+      <div class="logo-container" *ngIf="!isPanelCollapsed && !isMobileMenuOpen">
+        <img src="logo.png" alt="Compliance MAIT Logo" class="logo-image">
+      </div>
+      <button class="toggle-button" (click)="togglePanel()">
+        <span *ngIf="!isPanelCollapsed">◀</span>
+        <span *ngIf="isPanelCollapsed">▶</span>
+      </button>
+      <button class="close-mobile-menu" (click)="toggleMobileMenu()">✕</button>
+    </div>
+    
+    <!-- Navigation Menu -->
+    <div class="menu-section">
+      <div class="menu-title" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Navigation</div>
+      <div class="menu-items">
+        <a class="menu-item" routerLink="/profile" routerLinkActive="active" (click)="onMobileMenuItemClick()">
+          <span class="menu-icon"><img src="profile.png" alt="Profile" class="menu-item-image"></span>
+          <span class="menu-text" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Profile</span>
+        </a>
+        <a class="menu-item" routerLink="/certificates" routerLinkActive="active" (click)="onMobileMenuItemClick()">
+          <span class="menu-icon"><img src="certificate.png" alt="Certificates" class="menu-item-image"></span>
+          <span class="menu-text" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Certificates</span>
+        </a>
+        <a class="menu-item" routerLink="/connections" routerLinkActive="active" (click)="onMobileMenuItemClick()">
+          <span class="menu-icon"><img src="connections.png" alt="Connections" class="menu-item-image"></span>
+          <span class="menu-text" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Connections</span>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Actions Panel -->
+    <div class="menu-section">
+      <div class="menu-title" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Actions</div>
+      <div class="menu-items">
+        <a class="menu-item" routerLink="/notifications" routerLinkActive="active" (click)="onMobileMenuItemClick()">
+          <span class="menu-icon"><img src="notifications.png" alt="Notifications" class="menu-item-image"></span>
+          <span class="menu-text" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Notifications</span>
+        </a>
+        <a class="menu-item" routerLink="/certificates/add" routerLinkActive="active" (click)="onMobileMenuItemClick()">
+          <span class="menu-icon"><img src="add_lcr.png" alt="Add a certificate" class="menu-item-image"></span>
+          <span class="menu-text" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Add a certificate</span>
+        </a>
+        <a class="menu-item" routerLink="/photo" routerLinkActive="active" (click)="onMobileMenuItemClick()">
+          <span class="menu-icon"><img src="shot_lcr.png" alt="Scan a certificate" class="menu-item-image"></span>
+          <span class="menu-text" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Scan certificate</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay for Mobile Menu -->
+  <div class="mobile-overlay" [class.show]="isMobileMenuOpen" (click)="toggleMobileMenu()"></div>
+
+  <!-- Main Content -->
+  <div class="main-content" [class.expanded]="isPanelCollapsed">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- Mobile Bottom Action Bar -->
+<div class="mobile-action-bar">
+  <a class="action-item" routerLink="/notifications" routerLinkActive="active">
+    <span class="action-icon"><img src="notifications.png" alt="Notifications" class="action-icon"></span>
+  </a>
+  <a class="action-item" routerLink="/certificates/add" routerLinkActive="active">
+    <span class="action-icon"><img src="add_lcr.png" alt="Add a certificate" class="action-icon"></span>
+  </a>
+  <a class="action-item" routerLink="/photo" routerLinkActive="active">
+    <span class="action-icon"><img src="shot_lcr.png" alt="Scan a certificate" class="action-icon"></span>
+  </a>
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
