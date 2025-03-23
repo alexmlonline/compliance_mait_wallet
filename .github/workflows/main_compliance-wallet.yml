@@ -28,17 +28,17 @@ jobs:
 
       - name: Zip the Angular build output
         run: |
-          mkdir packaged
-          zip -r packaged/release.zip dist/complaince-mait
+          cd dist/complaince-mait
+          zip -r ../../release.zip .
 
       - name: Check if release.zip exists
-        run: ls -lh packaged/release.zip
+        run: ls -lh release.zip
 
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: 'compliance-wallet'
-          path: packaged/release.zip
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
