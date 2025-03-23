@@ -31,10 +31,13 @@ jobs:
           cd dist/complaince-mait
           zip -r ../../../release.zip .
 
+      - name: Check if release.zip exists
+        run: ls -lh release.zip
+
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
-          name: angular-app
+          name: 'compliance-wallet'
           path: release.zip
 
   deploy:
@@ -51,7 +54,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: angular-app
+          name: 'compliance-wallet'
 
       - name: Unzip artifact
         run: unzip release.zip
