@@ -26,6 +26,9 @@ jobs:
           npm install
           npm run build
 
+      - name: Copy web.config for Azure
+        run: cp src/web.config dist/complaince-mait/browser/          
+
       - name: Zip the Angular build output
         run: |
           cd dist/complaince-mait/browser
