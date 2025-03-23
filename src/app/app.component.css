@@ -232,6 +232,8 @@
   
   .app-container {
     margin-top: 60px; /* Adjust based on your mobile header height */
+    margin-bottom: 60px; /* Add bottom margin for mobile action bar */
+    min-height: calc(100vh - 120px); /* Subtract header and action bar heights */
   }
   
   .side-panel {
@@ -247,6 +249,10 @@
     left: 0;
   }
   
+  .toggle-button {
+    display: none; /* Hide toggle button on mobile */
+  }
+  
   .close-mobile-menu {
     display: block;
   }
@@ -254,6 +260,7 @@
   .main-content {
     margin-left: 0 !important;
     padding: 1rem;
+    padding-bottom: calc(1rem + 60px); /* Add extra padding at the bottom to prevent content from being hidden */
   }
   
   .mobile-overlay.show {
