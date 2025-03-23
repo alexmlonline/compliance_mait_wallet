@@ -29,7 +29,7 @@ jobs:
       - name: Zip the Angular build output
         run: |
           cd dist/complaince-mait
-          zip -r ../../../release.zip .
+          zip -r release.zip .
 
       - name: Check if release.zip exists
         run: ls -lh release.zip
