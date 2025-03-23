@@ -32,7 +32,7 @@ jobs:
           zip -r packaged/release.zip dist/complaince-mait
 
       - name: Check if release.zip exists
-        run: ls -lh release.zip
+        run: ls -lh packaged/release.zip
 
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
