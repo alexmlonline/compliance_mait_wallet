@@ -13,25 +13,25 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js 20
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build Angular app
-        run: npm run build -- --configuration production
-
-      - name: Zip build output
+      - name: Install dependencies and build Angular app
         run: |
-          cd dist
-          zip -r ../release.zip compliance-wallet # 👈 use your actual project folder name
+          npm install
+          npm run build
 
-      - name: Upload artifact
+      - name: Zip the Angular build output
+        run: |
+          cd dist/complaince-mait
+          zip -r ../../../release.zip .
+
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: angular-app
