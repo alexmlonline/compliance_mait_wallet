@@ -19,6 +19,18 @@ h2 {
   height: 280px;
   position: relative;
   margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.canvas-element {
+  display: none;
 }
 
 .corner {
@@ -26,6 +38,7 @@ h2 {
   width: 30px;
   height: 30px;
   border-color: #666;
+  z-index: 2;
 }
 
 .top-left {
@@ -63,6 +76,7 @@ h2 {
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
+  z-index: 2;
 }
 
 .center-cross:before, .center-cross:after {
@@ -129,4 +143,42 @@ h2 {
 
 .ai-analysis-button:hover {
   background-color: #45a049;
+}
+
+.retake-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 20px !important;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.retake-button:hover {
+  background-color: #d32f2f;
+}
+
+.photo-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.captured-image {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.error-text {
+  color: #f44336;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
 }

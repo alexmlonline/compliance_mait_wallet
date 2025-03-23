@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -6,180 +6,99 @@ import { Router } from '@angular/router';
   selector: 'app-photo',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="photo-container">
-      <h2>Scan LCR</h2>
-      
-      <div class="camera-frame">
-        <div class="corner top-left"></div>
-        <div class="corner top-right"></div>
-        <div class="center-cross"></div>
-        <div class="corner bottom-left"></div>
-        <div class="corner bottom-right"></div>
-      </div>
-      
-      <div class="camera-button-container">
-        <button class="camera-button"></button>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <p class="instruction-text">
-        Make sure that the image is clear and readable.
-      </p>
-      
-      <div class="divider"></div>
-      
-      <p class="terms-text">
-        You agree to the Terms and Conditions when you use this application.
-      </p>
-      
-      <button class="ai-analysis-button" (click)="runAIAnalysis()">
-        Run AI Analysis
-      </button>
-    </div>
-  `,
-  styles: [`
-    .photo-container {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    
-    h2 {
-      margin-bottom: 30px;
-      font-size: 1.5rem;
-      font-weight: 500;
-      align-self: flex-start;
-    }
-    
-    .camera-frame {
-      width: 280px;
-      height: 280px;
-      position: relative;
-      margin-bottom: 30px;
-    }
-    
-    .corner {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border-color: #666;
-    }
-    
-    .top-left {
-      top: 0;
-      left: 0;
-      border-top: 2px solid;
-      border-left: 2px solid;
-    }
-    
-    .top-right {
-      top: 0;
-      right: 0;
-      border-top: 2px solid;
-      border-right: 2px solid;
-    }
-    
-    .bottom-left {
-      bottom: 0;
-      left: 0;
-      border-bottom: 2px solid;
-      border-left: 2px solid;
-    }
-    
-    .bottom-right {
-      bottom: 0;
-      right: 0;
-      border-bottom: 2px solid;
-      border-right: 2px solid;
-    }
-    
-    .center-cross {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 20px;
-      height: 20px;
-    }
-    
-    .center-cross:before, .center-cross:after {
-      content: '';
-      position: absolute;
-      background-color: #666;
-    }
-    
-    .center-cross:before {
-      width: 20px;
-      height: 2px;
-      top: 9px;
-    }
-    
-    .center-cross:after {
-      height: 20px;
-      width: 2px;
-      left: 9px;
-    }
-    
-    .camera-button-container {
-      margin-bottom: 30px;
-    }
-    
-    .camera-button {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background-color: #666;
-      border: 4px solid #999;
-      cursor: pointer;
-    }
-    
-    .divider {
-      width: 100%;
-      height: 1px;
-      background-color: #ddd;
-      margin: 15px 0;
-    }
-    
-    .instruction-text {
-      text-align: center;
-      color: #666;
-      font-size: 0.9rem;
-      margin: 0;
-    }
-    
-    .terms-text {
-      text-align: center;
-      color: #666;
-      font-size: 0.9rem;
-      margin: 15px 0 30px;
-    }
-    
-    .ai-analysis-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    
-    .ai-analysis-button:hover {
-      background-color: #45a049;
-    }
-  `]
+  templateUrl: './photo.component.html',
+  styleUrls: ['./photo.component.css']
 })
-export class PhotoComponent {
+export class PhotoComponent implements OnInit, OnDestroy {
+  @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
+  @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
+  
+  public videoStream: MediaStream | null = null;
+  public photoTaken: boolean = false;
+  public capturedImage: string | null = null;
+  public cameraError: string | null = null;
+
   constructor(private router: Router) {}
+  
+  ngOnInit(): void {
+    // Initialize camera when component loads
+    this.initCamera();
+  }
+
+  ngOnDestroy(): void {
+    // Clean up resources when component is destroyed
+    this.stopCamera();
+  }
+
+  async initCamera(): Promise<void> {
+    this.cameraError = null;
+    this.photoTaken = false;
+    this.capturedImage = null;
+    
+    try {
+      // Request camera access with rear camera preferred
+      const constraints = {
+        video: {
+          facingMode: 'environment', // Use rear camera if available
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        }
+      };
+      
+      this.videoStream = await navigator.mediaDevices.getUserMedia(constraints);
+      
+      // Wait for the DOM to be ready
+      setTimeout(() => {
+        if (this.videoElement && this.videoElement.nativeElement) {
+          this.videoElement.nativeElement.srcObject = this.videoStream;
+        }
+      }, 0);
+    } catch (error) {
+      console.error('Error accessing camera:', error);
+      this.cameraError = 'Unable to access camera. Please ensure you have granted camera permissions.';
+    }
+  }
+
+  stopCamera(): void {
+    if (this.videoStream) {
+      this.videoStream.getTracks().forEach(track => track.stop());
+      this.videoStream = null;
+    }
+  }
+
+  takePhoto(): void {
+    if (!this.videoElement || !this.canvasElement) return;
+    
+    const video = this.videoElement.nativeElement;
+    const canvas = this.canvasElement.nativeElement;
+    
+    // Set canvas dimensions to match video
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    
+    // Draw the current video frame to the canvas
+    const context = canvas.getContext('2d');
+    if (context) {
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      // Convert canvas to image data URL
+      this.capturedImage = canvas.toDataURL('image/jpeg');
+      this.photoTaken = true;
+      
+      // Stop the camera after taking photo
+      this.stopCamera();
+    }
+  }
+
+  retakePhoto(): void {
+    this.photoTaken = false;
+    this.capturedImage = null;
+    this.initCamera();
+  }
   
   runAIAnalysis(): void {
     console.log('Running AI analysis...');
-    // In a real app, this would trigger AI processing
+    // In a real app, this would process the captured image
     // For now, we'll just simulate a delay and then navigate
     setTimeout(() => {
       // Navigate to results or another relevant page

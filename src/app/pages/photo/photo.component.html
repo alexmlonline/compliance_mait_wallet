@@ -2,6 +2,8 @@
   <h2>Scan LCR</h2>
   
   <div class="camera-frame">
+    <video #videoElement class="video-element" autoplay playsinline></video>
+    <canvas #canvasElement class="canvas-element"></canvas>
     <div class="corner top-left"></div>
     <div class="corner top-right"></div>
     <div class="center-cross"></div>
@@ -10,7 +12,7 @@
   </div>
   
   <div class="camera-button-container">
-    <button class="camera-button"></button>
+    <button class="camera-button" (click)="takePhoto()" *ngIf="!photoTaken"></button>
   </div>
   
   <div class="divider"></div>
@@ -25,7 +27,15 @@
     You agree to the Terms and Conditions when you use this application.
   </p>
   
-  <button class="ai-analysis-button" (click)="runAIAnalysis()">
+  <div *ngIf="photoTaken" class="photo-actions">
+    <img *ngIf="capturedImage" [src]="capturedImage" class="captured-image" alt="Captured photo">
+    <button class="retake-button" (click)="retakePhoto()">Retake Photo</button>
+    <button class="ai-analysis-button" (click)="runAIAnalysis()">Run AI Analysis</button>
+  </div>
+  
+  <button *ngIf="!photoTaken" class="ai-analysis-button" (click)="runAIAnalysis()">
     Run AI Analysis
   </button>
+  
+  <p class="error-text" *ngIf="cameraError">{{ cameraError }}</p>
 </div>
