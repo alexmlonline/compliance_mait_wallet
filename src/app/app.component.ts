@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,17 @@ export class AppComponent implements OnInit {
   isPanelCollapsed = false;
   isMobileMenuOpen = false;
   isMobileView = false;
+  isLoggedIn = false;
+  userEmail: string | null = null;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.checkScreenSize();
+    
+    // Subscribe to auth state changes
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+      this.userEmail = isLoggedIn ? this.authService.getUserEmail() : null;
+    });
   }
 
   ngOnInit() {
@@ -61,5 +70,9 @@ export class AppComponent implements OnInit {
       this.isMobileMenuOpen = false;
       document.body.style.overflow = '';
     }
+  }
+  
+  logout() {
+    this.authService.logout();
   }
 }

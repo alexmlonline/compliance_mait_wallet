@@ -8,7 +8,7 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <!-- Mobile Header with Logo and Burger Menu -->
-<div class="mobile-header">
+<div class="mobile-header" *ngIf="isLoggedIn">
   <div class="app-logo">
     <img src="logo.png" alt="Compliance MAIT Logo" class="logo-image">
   </div>
@@ -19,20 +19,34 @@
 
 <!-- Side Panel (Desktop) / Mobile Menu -->
 <div class="app-container">
-  <div class="side-panel" [class.collapsed]="isPanelCollapsed" [class.mobile-open]="isMobileMenuOpen">
+  <div class="side-panel" [class.collapsed]="isPanelCollapsed" [class.mobile-open]="isMobileMenuOpen" *ngIf="isLoggedIn">
     <div class="panel-header">
       <div class="logo-container" *ngIf="!isPanelCollapsed && !isMobileMenuOpen">
         <img src="logo.png" alt="Compliance MAIT Logo" class="logo-image">
       </div>
-      <button class="toggle-button" (click)="togglePanel()">
+      <button class="toggle-button" (click)="togglePanel()" *ngIf="isLoggedIn">
         <span *ngIf="!isPanelCollapsed">◀</span>
         <span *ngIf="isPanelCollapsed">▶</span>
       </button>
-      <button class="close-mobile-menu" (click)="toggleMobileMenu()">✕</button>
+      <button class="close-mobile-menu" (click)="toggleMobileMenu()" *ngIf="isLoggedIn">✕</button>
+    </div>
+    
+    <!-- User Info Section (only visible when logged in) -->
+    <div class="user-section" *ngIf="isLoggedIn && (!isPanelCollapsed || isMobileMenuOpen)">
+      
+      <div class="user-avatar">
+        <div  class="avatar-placeholder"><span  class="avatar-image" style="margin-top: 7px;
+          display: block;
+          margin-left: 10px;">👤</span></div>
+      </div>
+      <div class="user-info">
+        <div class="user-email">{{ userEmail }}</div>
+        <button class="logout-button" (click)="logout()">Logout</button>
+      </div>
     </div>
     
     <!-- Navigation Menu -->
-    <div class="menu-section">
+    <div class="menu-section" *ngIf="isLoggedIn">
       <div class="menu-title" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Navigation</div>
       <div class="menu-items">
         <a class="menu-item" routerLink="/profile" routerLinkActive="active" (click)="onMobileMenuItemClick()">
@@ -51,7 +65,7 @@
     </div>
     
     <!-- Actions Panel -->
-    <div class="menu-section">
+    <div class="menu-section" *ngIf="isLoggedIn">
       <div class="menu-title" *ngIf="!isPanelCollapsed || isMobileMenuOpen">Actions</div>
       <div class="menu-items">
         <a class="menu-item" routerLink="/notifications" routerLinkActive="active" (click)="onMobileMenuItemClick()">
@@ -80,7 +94,7 @@
 </div>
 
 <!-- Mobile Bottom Action Bar -->
-<div class="mobile-action-bar">
+<div class="mobile-action-bar" *ngIf="isLoggedIn">
   <a class="action-item" routerLink="/notifications" routerLinkActive="active">
     <span class="action-icon"><img src="notifications.png" alt="Notifications" class="action-icon"></span>
   </a>

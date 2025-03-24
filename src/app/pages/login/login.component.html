@@ -1,0 +1,44 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-container">
+      <img src="logo.png" alt="Compliance MAIT" class="logo">
+    </div>
+    
+    <h2 class="login-title">Login</h2>
+    
+    <div class="form-group">
+      <label for="email">Email [any for demo]</label>
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        [(ngModel)]="email" 
+        placeholder="Enter your email"
+        required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password [any for demo]</label>
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        [(ngModel)]="password" 
+        placeholder="Enter your password"
+        required>
+    </div>
+    
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+    
+    <button class="login-button" (click)="login()" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Login</span>
+      <span *ngIf="isLoading" class="spinner"></span>
+    </button>
+    
+    <div class="forgot-password">
+      <a href="javascript:void(0)" (click)="forgotPassword()">Forgot Password?</a>
+    </div>
+  </div>
+</div>
